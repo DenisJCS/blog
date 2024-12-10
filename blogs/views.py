@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import render
-from .forms import BlogPostForm
 from .models import BlogPost
-
+from django.shortcuts import render, redirect
+from .forms import BlogPostForm
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 def index(request):
@@ -26,10 +26,10 @@ def edit_post(request, post_id):
     if request.method !='POST':
         form =BlogPostForm(instance=post)
     else:
-        form = BlogPostForm(instance = post, data=request.POST)
+        form = BlogPostForm(instance=post, data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('blogs:index')
-        context = {'post': post, 'form': form}
-        return render(request, 'blogs/edit_post.html', context)
+    context = {'post': post, 'form': form}
+    return render(request, 'blogs/edit_post.html', context)
         
