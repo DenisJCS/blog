@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-        <meta charset="UTF-8">
-        <title>Blog</title>
+    <meta charset="UTF-8">
+    <title>Домашняя страница</title>
 </head>
 <body>
     <h1>Blog</h1>
+    <a href="{% url 'blogs:new_post' %}">Создать новое сообщение</a>
     <ul>
         {% for post in posts %}
-         <li>
-            <strong> {{ post.title }}</strong> ({{ post.date_added}}): <br>
-            {{post.text}}
-        </li>
+            <li>
+                <strong>{{ post.title }}</strong> ({{ post.date_added }}):<br>
+                {{ post.text }}<br>
+                <a href="{% url 'blogs:edit_post' post.id %}">Редактировать</a>
+            </li>
         {% endfor %}
     </ul>
 </body>
